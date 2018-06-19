@@ -1,6 +1,7 @@
 package online.letmesleep.iotbasedagriculture;
-
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,18 +13,46 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_control:
+                    getSupportActionBar().setTitle("  设  备  ");
+                    /*
+                    if (controlFragment == null)
+                        controlFragment = new ControlFragment();
+                    begin.replace(R.id.content, controlFragment);
+                    begin.commit();
+                    */
+                    return true;
+                case R.id.navigation_application:
+                    /*
+                    getSupportActionBar().setTitle("  监  测  ");
+                    hideAddApplicationActionButton(false);
+                    if (applicationFragment == null)
+                        applicationFragment = new ApplicationFragment();
+                    begin.replace(R.id.content, applicationFragment);
+                    begin.commit();
+                    */
+                    return true;
+
+            }
+            return false;
+        }
+
+    };
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDrawer();
     }
-
-
 
     private void initDrawer(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -47,10 +76,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
